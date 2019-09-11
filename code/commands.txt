@@ -1,0 +1,8 @@
+ansible --list-hosts al
+ansible --list-hosts web[1]
+ansible -m ping all
+
+
+ansible -m shell -a "uname" lb
+
+ansible -m shell -a "uname" lb
