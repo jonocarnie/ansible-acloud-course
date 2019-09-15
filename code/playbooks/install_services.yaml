@@ -1,0 +1,26 @@
+# install services
+---
+  - hosts: lb
+    become: true
+    tasks:
+      - name: install lighttpd
+        apk: 
+          name:
+            - openrc
+            - lighttpd
+          state: present
+      - name: ensure lighttpd starts
+        service: name=lighttpd state=started enabled=yes
+
+  - hosts: web
+    become: true
+    tasks:
+      - name: installing services
+        apk:
+          name:
+          - openrc
+          - lighttpd
+          - php7
+          state: present
+      - name: ensure lighttpd starts
+        service: name=lighttpd state=started enabled=yes

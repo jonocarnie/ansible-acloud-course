@@ -1,0 +1,6 @@
+# install loadbalancer
+---
+  - hosts: lb
+    tasks:
+      - name: install httpd - apache
+      

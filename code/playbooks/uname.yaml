@@ -1,0 +1,6 @@
+# uname.yaml
+---
+  - hosts: web
+    tasks:
+      - name: list servername
+        shell: uname -a

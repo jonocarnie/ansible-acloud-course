@@ -1,0 +1,7 @@
+# apk update inventory
+---
+  - hosts: web:lb
+    become: true
+    tasks:
+    - apk:
+         upgrade: yes

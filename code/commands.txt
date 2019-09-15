@@ -6,3 +6,7 @@ ansible -m ping all
 ansible -m shell -a "uname" lb
 
 ansible -m shell -a "uname" lb
+
+
+Turning off retry files
+retry_files_enabled = False
