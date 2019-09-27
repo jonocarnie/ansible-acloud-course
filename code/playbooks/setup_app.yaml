@@ -1,0 +1,24 @@
+# setup app
+---
+  - hosts: web
+    tasks:
+      - name: Upload nginx config files
+        template:
+          src: ../config/nginx.web.j2
+          dest: /etc/nginx/nginx.conf
+          owner: root
+          group: root
+          mode: 0644
+        notify: Reload Nginx
+
+      - name: configigure index.html
+        template:
+          src: ../config/index.j2
+          dest: /usr/share/nginx/html/index.html
+          owner: root
+          group: root
+          mode: 0644
+
+    handlers:
+      - name: Reload Nginx
+        shell: nginx -s reload

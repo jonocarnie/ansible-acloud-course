@@ -3,5 +3,5 @@
   - hosts: web:lb
     become: true
     tasks:
-    - apk:
+    - yum:
          upgrade: yes

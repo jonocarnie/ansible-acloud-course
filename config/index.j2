@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Server</title>
+</head>
+<body>
+    <h1><strong>This is the web server page for {{ ansible_host }} </strong></h1>
+    <br>
+    <h2>HostDetails: {{ ansible_facts.os_family }} </h2>
+    <br>
+    <h2>HostDetails: {{ inventory_hostname }} </h2>
+
+</body>
+</html>

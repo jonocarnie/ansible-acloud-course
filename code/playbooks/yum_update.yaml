@@ -1,0 +1,8 @@
+# yum_update
+---
+  - hosts: lb:web
+    tasks:
+      - name: Updating yum packages
+        yum: 
+          name: '*'
+          state: latest

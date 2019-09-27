@@ -1,19 +1,13 @@
-FROM docker.io/alpine:3.6
+FROM centos
 
-RUN apk update && \
-    apk add bash git openssh rsync augeas shadow python3 && \
-    deluser $(getent passwd 33 | cut -d: -f1) && \
-    delgroup $(getent group 33 | cut -d: -f1) 2>/dev/null || true && \
-    mkdir -p ~root/.ssh /etc/authorized_keys && chmod 700 ~root/.ssh/ && \
-    augtool 'set /files/etc/ssh/sshd_config/AuthorizedKeysFile ".ssh/authorized_keys /etc/authorized_keys/%u"' && \
-    echo -e "Port 22\n" >> /etc/ssh/sshd_config && \
-    cp -a /etc/ssh /etc/ssh.cache && \
-    rm -rf /var/cache/apk/*
-
-EXPOSE 22
-
-COPY entry.sh /entry.sh
-
-ENTRYPOINT ["/entry.sh"]
-
-CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config"]
+# ssh server
+# Don't forget to run '/usr/sbin/sshd -D' if you actually want to ssh into this container
+RUN yum install -y openssh-server
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y python36u python36u-libs python36u-devel python36u-pip
+RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+#ADD ~/.ssh/id_rsa.pub  /root/.ssh/authorized_keys
+#ADD src/sshd/sshd_config /etc/ssh/sshd_config 
+RUN echo root:welcome1 | chpasswd
+CMD ["/usr/sbin/sshd", "-D"]

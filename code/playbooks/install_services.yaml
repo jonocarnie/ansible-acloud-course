@@ -3,24 +3,21 @@
   - hosts: lb
     become: true
     tasks:
-      - name: install lighttpd
-        apk: 
-          name:
-            - openrc
-            - lighttpd
-          state: present
-      - name: ensure lighttpd starts
-        service: name=lighttpd state=started enabled=yes
+      - name: Installing nginx
+        yum: name=nginx state=present
+      - name: start nginx
+        shell: nginx
+
 
   - hosts: web
     become: true
     tasks:
       - name: installing services
-        apk:
+        yum:
           name:
-          - openrc
-          - lighttpd
-          - php7
+            - nginx
           state: present
-      - name: ensure lighttpd starts
-        service: name=lighttpd state=started enabled=yes
+      - name: start nginx
+        shell: nginx
+        
+

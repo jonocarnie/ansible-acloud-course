@@ -1,0 +1,14 @@
+# use debug to display details
+---
+  - hosts: web
+    vars:
+      path_to_folder: "/etc/nginx/"
+  
+    tasks:
+      - name: See directory contents
+        command: ls -la {{ path_to_folder }}
+        register: dir_contents
+
+      - name: Debug directory contents
+        debug:
+          msg: "{{ dir_contents }}"

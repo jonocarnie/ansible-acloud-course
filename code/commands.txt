@@ -10,3 +10,6 @@ ansible -m shell -a "uname" lb
 
 Turning off retry files
 retry_files_enabled = False
+
+Get the ipaddress of the running container
+docker inspect test-client | jq '.[].NetworkSettings.Networks.bridge.IPAddress'

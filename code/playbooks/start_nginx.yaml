@@ -1,0 +1,8 @@
+# install apache
+
+---
+  - hosts: all
+    tasks:
+      - name: Start NGINX
+        shell: nginx
+
